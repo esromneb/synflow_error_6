@@ -1,0 +1,23 @@
+package com.x.x;
+
+network Top {
+	
+	// SPI pins
+	in bool miso;
+	out bool mosi;
+	out bool sck;
+
+	spi = new com.x.x.SPIMaster({ CLK_DIV: 7 });
+
+	spi.reads(miso);
+	spi.writes(mosi, sck);
+	
+	dummy = new task {
+		out sync u8 data_tx;
+		void loop() {
+			data_tx.write(0);
+		}
+	};
+	
+	dummy.writes(spi.data_tx);
+}

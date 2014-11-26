@@ -1,0 +1,24 @@
+package com.x.x;
+
+task SPIMaster {
+	properties {
+		clocks: ['clk'],
+		implementation: {
+			type: 'external',
+			file: '../../verilog/SPIMaster.v'   // Works with Lattice
+		  //file: '../verilog/SPIMaster.v'      // Works with ModelSim
+		}
+	}
+	
+	const int CLK_DIV = 2;
+	
+	in bool miso;
+	out bool mosi;
+	out bool sck;
+	in sync u8 data_tx;
+	out u8 data_rx;
+	out bool busy;
+	out bool new_data;
+	
+	
+}
